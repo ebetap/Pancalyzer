@@ -1,58 +1,126 @@
-# Pancalyzer
-Analisis komentar jahatmu nganggo chatGPT berdasarkan nilai asas adab pada pancasila
+### Modul `Pancalyzer`
 
-Berikut adalah dokumentasi lengkap untuk modul `Pancalyzer`:
+Modul `Pancalyzer` adalah alat untuk menganalisis teks berdasarkan nilai-nilai Pancasila, memberikan saran perbaikan, serta menganalisis penggunaan emoji dan karakter khusus dalam teks.
 
-Modul `Pancalyzer` adalah sebuah alat untuk menganalisis teks dan menilai sejauh mana teks tersebut mencerminkan nilai-nilai Pancasila. Modul ini menggunakan model bahasa ChatGPT untuk menganalisis teks.
+#### Instalasi
 
-## Instalasi
+Instalasi modul `Pancalyzer` dapat dilakukan dengan menggunakan npm:
 
-Untuk menggunakan `Pancalyzer`, Anda perlu menginstalasi paket `chatgpt`:
-
-```bash
-npm install chatgpt
+```
+npm install pancalyzer
 ```
 
-Setelah menginstalasi `chatgpt`, Anda dapat menyertakan modul `Pancalyzer` di dalam proyek Anda dengan cara yang berikut:
+#### Penggunaan
 
 ```javascript
-const Pancalyzer = require('./Pancalyzer');
-```
+const Pancalyzer = require('pancalyzer');
 
-## Penggunaan
+// Inisialisasi Pancalyzer
+const analyzer = new Pancalyzer();
 
-### Membuat Instance Pancalyzer
-
-Untuk menggunakan `Pancalyzer`, Anda perlu membuat instance baru dari kelas `Pancalyzer`:
-
-```javascript
-const pancalyzer = new Pancalyzer();
-```
-
-### Menganalisis Teks
-
-Anda dapat menggunakan metode `analyzeText` untuk menganalisis teks:
-
-```javascript
-const text = "Teks yang akan dianalisis.";
-pancalyzer.analyzeText(text)
-    .then(analysisResult => {
-        console.log(analysisResult);
+// Analisis teks
+const text = "Kemerdekaan adalah hak segala bangsa.";
+analyzer.analyzeText(text)
+    .then(analysis => {
+        console.log("Hasil analisis:", analysis);
     })
     .catch(error => {
         console.error("Terjadi kesalahan:", error);
     });
 ```
 
-Metode `analyzeText` akan mengembalikan objek yang berisi hasil analisis teks terhadap nilai-nilai Pancasila. Objek tersebut memiliki properti berikut:
+#### Kelas: Pancalyzer
 
-- `ketuhanan`: Menyatakan apakah teks mencerminkan nilai ketuhanan.
-- `kemanusiaan`: Menyatakan apakah teks mencerminkan nilai kemanusiaan.
-- `persatuan`: Menyatakan apakah teks mencerminkan nilai persatuan.
-- `kerakyatan`: Menyatakan apakah teks mencerminkan nilai kerakyatan.
-- `keadilan`: Menyatakan apakah teks mencerminkan nilai keadilan.
-- `pancasilaScore`: Persentase sejauh mana teks mencerminkan semua nilai-nilai Pancasila.
+##### Metode: analyzeText(text)
 
----
+Metode untuk menganalisis teks berdasarkan nilai-nilai Pancasila, memberikan saran perbaikan, serta menganalisis penggunaan emoji dan karakter khusus dalam teks.
 
-Dengan dokumentasi ini, Anda dapat menggunakan modul `Pancalyzer` dengan mudah dan efektif. Jika Anda memiliki pertanyaan lebih lanjut atau memerlukan bantuan tambahan, jangan ragu untuk bertanya!
+- **Parameter:**
+    - `text` (string): Teks yang akan dianalisis.
+
+- **Return:**
+    - Promise\<Object>: Objek hasil analisis, termasuk nilai-nilai Pancasila, saran perbaikan, analisis emoji, dan analisis karakter.
+
+##### Metode: analyzeComment(comment)
+
+Metode untuk menganalisis komentar berdasarkan nilai-nilai Pancasila.
+
+- **Parameter:**
+    - `comment` (string): Komentar yang akan dianalisis.
+
+- **Return:**
+    - Object: Objek hasil analisis nilai-nilai Pancasila.
+
+##### Metode: checkKeyword(comment, keywords)
+
+Metode untuk memeriksa apakah komentar mengandung kata kunci tertentu.
+
+- **Parameter:**
+    - `comment` (string): Komentar yang akan diperiksa.
+    - `keywords` (Array\<string>): Array kata kunci yang akan diperiksa.
+
+- **Return:**
+    - boolean: `true` jika komentar mengandung setidaknya satu kata kunci, `false` jika tidak.
+
+##### Metode: calculatePancasilaScore(analysis)
+
+Metode untuk menghitung skor Pancasila berdasarkan analisis komentar.
+
+- **Parameter:**
+    - `analysis` (Object): Objek hasil analisis nilai-nilai Pancasila.
+
+- **Return:**
+    - number: Skor Pancasila (dalam persentase).
+
+##### Metode: generateSuggestions(text)
+
+Metode untuk menghasilkan saran perbaikan untuk teks.
+
+- **Parameter:**
+    - `text` (string): Teks yang akan diperiksa.
+
+- **Return:**
+    - Promise\<string|null>: Saran perbaikan teks, atau `null` jika terjadi kesalahan.
+
+##### Metode: analyzeEmojis(text)
+
+Metode untuk menganalisis penggunaan emoji dalam teks.
+
+- **Parameter:**
+    - `text` (string): Teks yang akan dianalisis.
+
+- **Return:**
+    - Object: Objek yang berisi jumlah dan daftar emoji unik dalam teks.
+
+##### Metode: analyzeCharacters(text)
+
+Metode untuk menganalisis karakter khusus dalam teks.
+
+- **Parameter:**
+    - `text` (string): Teks yang akan dianalisis.
+
+- **Return:**
+    - Object: Objek yang berisi panjang teks, jumlah kata, dan jumlah karakter unik.
+
+#### Contoh Penggunaan
+
+```javascript
+const Pancalyzer = require('pancalyzer');
+
+// Inisialisasi Pancalyzer
+const analyzer = new Pancalyzer();
+
+// Teks yang akan dianalisis
+const text = "Kemerdekaan adalah hak segala bangsa.";
+
+// Analisis teks
+analyzer.analyzeText(text)
+    .then(analysis => {
+        console.log("Hasil analisis:", analysis);
+    })
+    .catch(error => {
+        console.error("Terjadi kesalahan:", error);
+    });
+```
+
+Dengan menggunakan modul `Pancalyzer`, Anda dapat dengan mudah menganalisis teks berdasarkan nilai-nilai Pancasila, memberikan saran perbaikan, serta menganalisis penggunaan emoji dan karakter khusus dalam teks.
